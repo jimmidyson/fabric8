@@ -2,4 +2,3 @@
     "startCommand": "bin/cassandra -p cassandra.pid",
     "pidFile": "cassandra.pid"
 }
-h

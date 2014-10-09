@@ -15,42 +15,22 @@
  */
 package io.fabric8.insight.rhq.metrics;
 
+import com.google.common.collect.ImmutableMap;
 import io.fabric8.api.jcip.ThreadSafe;
 import io.fabric8.api.scr.AbstractComponent;
 import io.fabric8.api.scr.Configurer;
 import io.fabric8.common.util.Strings;
-import io.fabric8.insight.metrics.model.MBeanAttrResult;
-import io.fabric8.insight.metrics.model.MBeanAttrsResult;
-import io.fabric8.insight.metrics.model.MBeanOperResult;
-import io.fabric8.insight.metrics.model.MBeanOpersResult;
-import io.fabric8.insight.metrics.model.Metrics;
-import io.fabric8.insight.metrics.model.MetricsStorageService;
-import io.fabric8.insight.metrics.model.QueryResult;
-import io.fabric8.insight.metrics.model.Result;
+import io.fabric8.insight.metrics.model.*;
 import io.fabric8.insight.storage.StorageService;
-import org.apache.felix.scr.annotations.Activate;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.ConfigurationPolicy;
-import org.apache.felix.scr.annotations.Deactivate;
-import org.apache.felix.scr.annotations.Modified;
-import org.apache.felix.scr.annotations.Property;
-import org.apache.felix.scr.annotations.Reference;
-import org.apache.felix.scr.annotations.Service;
+import org.apache.felix.scr.annotations.*;
 import org.rhq.metrics.RHQMetrics;
 import org.rhq.metrics.core.RawNumericMetric;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.management.InstanceAlreadyExistsException;
 import javax.management.InstanceNotFoundException;
 import javax.management.MBeanRegistrationException;
-import javax.management.MalformedObjectNameException;
-import javax.management.NotCompliantMBeanException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * An implementation of {@link StorageService} using <a href="https://github.com/rhq-project/rhq-metrics">RHQ Metrics</a>
@@ -119,7 +99,9 @@ public class RhqMetricsStorage extends AbstractComponent implements MetricsStora
         if (nodes != null && nodes.length > 0) {
             builder = builder.withCassandraDataStore();
             LOG.info("Using Cassandra nodes: " + Arrays.asList(nodes));
+
             builder.withNodes(nodes);
+
             if (Strings.isNotBlank(keyspace)) {
                 builder.withKeyspace(keyspace);
             }

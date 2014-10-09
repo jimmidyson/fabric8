@@ -32,34 +32,15 @@
 
   <properties>
     <fuse.osgi.export>
-      io.fabric8.insight.rhq.metrics;version=${project.version},
-      org.rhq.metrics.core;version=${project.version}
+      io.fabric8.insight.rhq.metrics;version=${project.version}
     </fuse.osgi.export>
     <fuse.osgi.import>
-        !net.jpountz.lz4*,
-        !com.google.protobuf*,
-        !org.jboss.logging*,
-        !org.jboss.marshalling*,
-        !org.joda.convert*,
-        !org.xerial.snappy*,
-        !sun.misc*,
-        !sun.nio.ch*,
+        com.google*;version="[16,17)",
+        org.rhq.metrics*;version="[0.2,1)",
+        javax.management,
+        org.osgi.service.cm,
         *
     </fuse.osgi.import>
-    <fuse.osgi.private.pkg>
-      org.rhq.metrics*;-split-package:=first,
-      org.jboss.netty*;-split-package:=first,
-      org.jboss.logging*;-split-package:=first,
-      org.jboss.marshalling*;-split-package:=first,
-      io.netty*;-split-package:=first,
-      com.google.protobuf*;-split-package:=first,
-      org.joda*;-split-package:=first,
-      com.codahale.metrics*;-split-package:=first,
-      com.datastax.cassandra*;-split-package:=first,
-      com.datastax.driver*;-split-package:=first,
-      gnu.trove*;-split-package:=first,
-      net.jpountz.lz4*;-split-package:=first,
-    </fuse.osgi.private.pkg>
   </properties>
 
   <dependencies>

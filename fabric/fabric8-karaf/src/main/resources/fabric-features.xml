@@ -400,6 +400,15 @@
         <feature version="${project.version}">fabric-groovy</feature>
         <feature version="${project.version}">insight-metrics</feature>
         <feature>http</feature>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.javax-inject/${javax.inject.bundle.version}</bundle>
+        <bundle>mvn:com.datastax.cassandra/cassandra-driver-core/${datastax.version}</bundle>
+        <bundle>mvn:com.codahale.metrics/metrics-core/${codahale-metrics-version}</bundle>
+        <bundle>mvn:com.google.guava/guava/16.0.1</bundle>
+        <bundle>mvn:io.netty/netty/3.9.0.Final</bundle>
+        <bundle>wrap:mvn:net.sf.trove4j/trove4j/3.0.3</bundle>
+        <bundle>mvn:joda-time/joda-time/2.3</bundle>
+        <bundle>mvn:org.rhq.metrics/rhq-metrics-core/${rhq-metrics-version}</bundle>
+        <bundle>mvn:org.rhq.metrics/rhq-metrics-api/${rhq-metrics-version}</bundle>
         <bundle>mvn:io.fabric8.insight/insight-metrics/${project.version}</bundle>
         <bundle>mvn:io.fabric8.insight/insight-rhq-metrics/${project.version}</bundle>
     </feature>
