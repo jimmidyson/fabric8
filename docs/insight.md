@@ -18,8 +18,14 @@ all be managed through Fabric8 profiles.
 ### Installation
 
 Installing Insight is very simple: just as with anything else in Fabric8, it's all done by assigning profiles.
-To create a data node for Elasticsearch, just assign the `insight-elasticsearch.datastore` profile to an existing
-container or create a new one. If you're doing this all on one container you can simply do:
+You can install logs & metrics separately so you can choose what pieces of Insight you actually install. When
+using Insight Logs, you only have one choice for storage (Elasticsearch). With Insight Metrics you have 3 choices:
+Elasticsearch, RHQ Metrics (Cassandra) & InfluxDB.
+
+#### Installing Insight Logs
+
+First thing to do is create a data node for Elasticsearch. Just assign the `insight-elasticsearch.datastore` profile
+to an existing container or create a new one. If you're doing this all on one container you can simply do:
 
     container-add-profile root insight-elasticsearch.datastore
 
@@ -42,6 +48,27 @@ by the `insight-console` profile:
 
 Hawtio will then have a new perspective available: Fabric8. This will have a tab called `Logs` which provides a
 Kibana dashboard for you to search all logs across your fabric.
+
+#### Installing Insight Metrics
+
+##### Elasticsearch
+
+After creating an Elasticsearch cluster as described above, then all you need to do is:
+
+    container-add-profile root insight-metrics.elasticsearch
+
+This will ensure that all metrics are sent to the Elasticsearch cluster that you created previously.
+ 
+##### RHQ Metrics
+
+RHQ Metrics uses Cassandra to store metrics data. To create a Cassandra container to store the data:
+
+    container-create-child --profile containers-services-cassandra root cassandra
+    
+You can then add the `insight-metrics.rhq` profile to any container you want to log metrics to the
+Cassandra database you just created:
+
+    container-add-profile root insight-metrics.rhq
 
 ### The Insight Console
 
