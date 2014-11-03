@@ -15,19 +15,17 @@
                   "containerPort": 5000,
                   "protocol": "TCP"
                 }
-              ]
+              ],
+              "env": [
+                { "name": "SETTINGS_FLAVOR", "value": "local" },
+                { "name": "STORAGE_PATH", "value": "/registry-data" },
+                { "name": "SEARCH_BACKEND", "value": "sqlalchemy" },
+                { "name": "SQLALCHEMY_INDEX_DATABASE", "value": "sqlite:////registry-data/docker-registry.db" }
+              ],
             }
           ],
-          "env": [
-            { "name": "SETTINGS_FLAVOR", "value": "local" },
-            { "name": "STORAGE_PATH", "value": "/registry-data" },
-            { "name": "SEARCH_BACKEND", "value": "sqlalchemy" },
-            { "name": "SQLALCHEMY_INDEX_DATABASE", "value": "sqlite:////registry-data/docker-registry.db" }
-          ],
           "id": "registryPod",
-          "version": "v1beta1",
-          "volumes": [
-          ]
+          "version": "v1beta1"
         },
         "restartpolicy": {}
       },
