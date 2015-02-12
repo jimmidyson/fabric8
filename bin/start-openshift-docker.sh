@@ -180,6 +180,7 @@ getServiceIpAndPort()
 }
 
 FABRIC8_CONSOLE=http://$(getServiceIpAndPort "$K8S_SERVICES" fabric8-console)/hawtio/
+KUBERNETES_MASTER_SERVICE=http://$(getServiceIpAndPort "$K8S_SERVICES" kubernetes)
 DOCKER_REGISTRY=http://$(getServiceIpAndPort "$K8S_SERVICES" registry)
 INFLUXDB=http://$(getServiceIpAndPort "$K8S_SERVICES" influxdb-service)
 ELASTICSEARCH=http://$(getServiceIpAndPort "$K8S_SERVICES" elasticsearch)
@@ -252,6 +253,14 @@ if [ ${DEPLOY_ALL} -eq 1 ]; then
 fi
 
 printf "$SERVICE_TABLE" | column -t -s '|'
+
+printf "\n" 
+printf "%s\n" "Set these environment variables on the machine you'll use to develop on"
+printf "\n" 
+printf "%s\n" "export KUBERNETES_MASTER=$KUBERNETES_MASTER_SERVICE"
+printf "%s\n" "export DOCKER_REGISTRY=$DOCKER_REGISTRY"
+printf "%s\n" "export FABRIC8_CONSOLE=$FABRIC8_CONSOLE"
+printf "\n" 
 
 if [[ $OSTYPE == darwin* ]]; then
   open "${FABRIC8_CONSOLE}kubernetes/overview" &> /dev/null &
